@@ -1,84 +1,83 @@
 <h2>School</h2>
 <form (ngSubmit)="onSubmit()" [formGroup]="schoolForm">
+  <div>
     <div>
-      <div>
+      <label>Name</label>
+      <input type="text" placeholder="Name" id="name" formControlName="name">
+    </div>
+    <div>
+      <label>Email</label>
+      <input type="email" placeholder="Email" formControlName="emailAddress" id="emailAddress">
+    </div>
+    <div>
+      <label>Phone Number</label>
+      <input type="text" placeholder="Phone Number"
+             formControlName="phoneNumber" id="phoneNumber">
+    </div>
+    <div formGroupName="address">
+      <label>Address: </label>
+      <div style="margin-left: 30px">
         <div>
-          <label>Name</label>
-          <input type="text" placeholder="Name" id="name" formControlName="name">
+          <label for="street">Street</label>
+          <input type="text" placeholder="Street" formControlName="street" id="street">
         </div>
         <div>
-          <label>Email</label>
-          <input type="email" placeholder="Email" formControlName="emailAddress" id="emailAddress">
+          <label for="city">City</label>
+          <input type="text" placeholder="City" formControlName="city" id="city">
         </div>
         <div>
-          <label>Phone Number</label>
-          <input type="text" placeholder="Phone Number"
-                 formControlName="phoneNumber" id="phoneNumber">
-        </div>
-        <div formGroupName="address">
-          <label>Address: </label>
-          <div style="margin-left: 30px">
-            <div>
-              <label for="street">Street</label>
-              <input type="text" placeholder="Street" formControlName="street" id="street">
-            </div>
-            <div>
-              <label for="city">City</label>
-              <input type="text" placeholder="City" formControlName="city" id="city">
-            </div>
-            <div>
-              <label for="country">Country</label>
-              <input type="text" placeholder="Country" formControlName="country" id="country">
-            </div>
-            <div>
-              <label for="state">State</label>
-              <input type="text" placeholder="State" formControlName="state" id="state">
-            </div>
-          </div>
+          <label for="country">Country</label>
+          <input type="text" placeholder="Country" formControlName="country" id="country">
         </div>
         <div>
-          <label>Students</label>
-          <button type="button" (click)="addStudent()">Add Student</button>
-          <div style="margin-left: 30px">
-            <div>
-              <div>
-                <div formArrayName="students">
-                  <div *ngFor="let student of studentArray().controls; let studentIndex=index">
-                    <div [formGroupName]="studentIndex" style="overflow-x:auto;">
-                      <table>
-                        <tr>
-                          <td>Name :<input type="text" formControlName="name" minlength="2"></td>
-                          <td>Email:<input type="text" formControlName="emailAddress" minlength="10"></td>
-                          <td><button type="button" (click)="addSkill(studentIndex)">Add Skill</button></td>
-                          <td><button (click)="removeStudent(studentIndex)" class="danger">Remove</button></td>
-                        </tr>
-                      </table>
-                      <div style="margin-left: 30px">
-                        <table formArrayName="skills">
-                          <tr *ngFor="let skill of skillArray(studentIndex).controls; let j=index"
-                              [formGroupName]="j">
-                            <td>Name :<input type="text" formControlName="name"></td>
-                            <td>Level :<input type="number" formControlName="level" min="0" max="10"></td>
-                            <td><button (click)="removeSkill(studentIndex,j)" class="danger">Remove</button></td>
-                          </tr>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+          <label for="state">State</label>
+          <input type="text" placeholder="State" formControlName="state" id="state">
+        </div>
+      </div>
+    </div>
+    <div>
+      <label>Students</label>
+      <button type="button" (click)="addStudent()">Add Student</button>
+      <div style="margin-left: 30px">
+        <div formArrayName="students">
+          <div *ngFor="let student of studentArray().controls; let studentIndex=index">
+            <div [formGroupName]="studentIndex" style="overflow-x:auto;">
+              <table>
+                <tr>
+                  <td>Name :<input type="text" formControlName="name" minlength="2"></td>
+                  <td>Email:<input type="text" formControlName="emailAddress" minlength="10"></td>
+                  <td>
+                    <button type="button" (click)="addSkill(studentIndex)">Add Skill</button>
+                  </td>
+                  <td>
+                    <button (click)="removeStudent(studentIndex)" class="danger">Remove</button>
+                  </td>
+                </tr>
+              </table>
+              <div style="margin-left: 30px">
+                <table formArrayName="skills">
+                  <tr *ngFor="let skill of skillArray(studentIndex).controls; let j=index"
+                      [formGroupName]="j">
+                    <td>Name :<input type="text" formControlName="name"></td>
+                    <td>Level :<input type="number" formControlName="level" min="0" max="10"></td>
+                    <td>
+                      <button (click)="removeSkill(studentIndex,j)" class="danger">Remove</button>
+                    </td>
+                  </tr>
+                </table>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <hr><hr>
+  </div>
+  <hr>
 
-    <div>
-      <div>
-        <button type="submit">Create</button>
-      </div><br>
-      <a (click)="patchForm()" type="submit">PatchValue</a><br><br>
-      <a (click)="clearForm()" type="submit" class="danger">ClearForm</a>
-    </div>
-  </form>
+  <div>
+    <button type="submit">Create</button>
+    <br>
+    <a (click)="patchForm()" type="submit">PatchValue</a><br><br>
+    <a (click)="clearForm()" type="submit" class="danger">ClearForm</a>
+  </div>
+</form>

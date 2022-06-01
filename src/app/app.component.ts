@@ -111,6 +111,7 @@ export class AppComponent implements OnInit{
     console.log('Form Submit: ', this.schoolForm.value);
   }
 
+  /** students */
   studentArray(): FormArray{
     return this.schoolForm.get('students') as FormArray;
   }
@@ -132,6 +133,7 @@ export class AppComponent implements OnInit{
     this.studentArray().removeAt(studentIndex);
   }
 
+  /** skills */
   skillArray(studentIndex: number): FormArray{
     return this.studentArray().at(studentIndex).get('skills') as FormArray;
   }
